@@ -1,0 +1,57 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Overlay -->
+  <rect width="375" height="812" fill="#000000" opacity="0.5"/>
+  
+  <!-- Modal Container -->
+  <g id="export-csv-modal">
+    <rect x="32" y="256" width="311" height="300" rx="16" fill="#FFFFFF"/>
+    
+    <!-- Modal Header -->
+    <text x="48" y="296" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#0F172A">
+      Export to CSV
+    </text>
+    <!-- Close Button -->
+    <circle cx="311" cy="282" r="16" fill="#F1F5F9"/>
+    <path d="M 306 277 L 316 287 M 306 287 L 316 277" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Export Icon -->
+    <circle cx="187.5" cy="356" r="32" fill="#DCFCE7"/>
+    <path d="M 187.5 344 L 187.5 368 M 187.5 344 L 182 350 M 187.5 344 L 193 350" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <rect x="177" y="366" width="21" height="8" rx="1" fill="none" stroke="#10B981" stroke-width="2"/>
+    
+    <!-- Time Period Selector -->
+    <g id="time-period-selector">
+      <text x="48" y="428" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+        TIME PERIOD
+      </text>
+      <rect x="48" y="436" width="279" height="48" rx="8" fill="#F8FAFC"/>
+      
+      <!-- Monthly (Active) -->
+      <rect x="56" y="444" width="131" height="32" rx="6" fill="#10B981"/>
+      <text x="104" y="466" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+        Monthly
+      </text>
+      
+      <!-- Yearly -->
+      <rect x="195" y="444" width="124" height="32" rx="6" fill="transparent"/>
+      <text x="257" y="466" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B" text-anchor="middle">
+        Yearly
+      </text>
+    </g>
+    
+    <!-- Action Buttons -->
+    <g id="action-buttons">
+      <!-- Cancel Button -->
+      <rect x="48" y="508" width="131" height="36" rx="8" fill="#F1F5F9"/>
+      <text x="113.5" y="531" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#64748B" text-anchor="middle">
+        Cancel
+      </text>
+      
+      <!-- Export Button -->
+      <rect x="196" y="508" width="131" height="36" rx="8" fill="#10B981"/>
+      <text x="261.5" y="531" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+        Export
+      </text>
+    </g>
+  </g>
+</svg>
