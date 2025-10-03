@@ -70,4 +70,76 @@ test.describe('Landing Page', () => {
     await expect(page).toHaveURL('/settings')
     await expect(page.locator('h1:has-text("Settings")')).toBeVisible()
   })
+
+  test('should display at least one transaction', async ({ page }) => {
+    // Wait for transactions to load
+    await page.waitForLoadState('networkidle')
+
+    // Check if there are transactions in the list
+    const transactionList = page.locator('.transaction-list')
+    const emptyState = page.locator('.empty-state')
+
+    // If there are no transactions, add one through the UI
+    if (await emptyState.isVisible()) {
+      // Click FAB button to open add transaction modal
+      const fabButton = page.locator('.fab-button')
+      await fabButton.click()
+
+      // Wait for modal to open
+      await expect(page.locator('.modal-overlay')).toBeVisible()
+      await expect(page.locator('h2:has-text("Add Transaction")')).toBeVisible()
+
+      // Select transaction type (expense)
+      const expenseBtn = page.locator('.type-selector button:has-text("Expense")')
+      await expenseBtn.click()
+
+      // Fill in transaction details
+      await page.fill('input[placeholder="Amount"]', '50.00')
+      await page.fill('input[placeholder="Description"]', 'Test Transaction')
+
+      // Select first available category
+      const firstCategory = page.locator('.category-option').first()
+      await firstCategory.click()
+
+      // Submit the form
+      const submitBtn = page.locator('button:has-text("Add Transaction")')
+      await submitBtn.click()
+
+      // Wait for modal to close
+      await expect(page.locator('.modal-overlay')).not.toBeVisible()
+
+      // Wait for the transaction to appear
+      await page.waitForLoadState('networkidle')
+    }
+
+    // Verify at least one transaction is displayed
+    await expect(transactionList).toBeVisible()
+
+    const transactionItems = page.locator('.transaction-item')
+    const count = await transactionItems.count()
+    expect(count).toBeGreaterThanOrEqual(1)
+
+    // Verify transaction structure for the first transaction
+    const firstTransaction = transactionItems.first()
+    await expect(firstTransaction).toBeVisible()
+
+    // Check transaction has category
+    const category = firstTransaction.locator('.transaction-category')
+    await expect(category).toBeVisible()
+    await expect(category).not.toBeEmpty()
+
+    // Check transaction has description
+    const description = firstTransaction.locator('.transaction-description')
+    await expect(description).toBeVisible()
+
+    // Check transaction has amount
+    const amount = firstTransaction.locator('.transaction-amount')
+    await expect(amount).toBeVisible()
+    await expect(amount).toContainText('€')
+
+    // Check transaction has delete button
+    const deleteBtn = firstTransaction.locator('.delete-btn')
+    await expect(deleteBtn).toBeVisible()
+    await expect(deleteBtn).toHaveAttribute('aria-label', 'Delete transaction')
+  })
 })
