@@ -23,6 +23,7 @@ Before proceeding, verify alignment with constitutional principles:
 
 - [x] **Code Quality Excellence:** Plan includes TypeScript strict mode, ESLint/Prettier setup, JSDoc documentation requirements, code review process, and < 50 line function targets
 - [x] **Testing Standards (Playwright):** E2E test coverage planned for all user-facing features with Page Object Model pattern, cross-browser testing, and CI integration
+- [x] **Vue-tsc Standards:** No Ts errors should be present at any time. Before consider a task as complete search a fix any ts error
 - [x] **User Experience Consistency:** PrimeVue Aura design system adherence, responsive breakpoints (320px-1440px+), WCAG 2.1 AA accessibility, loading states, and consistent interactions
 - [x] **Performance Requirements:** Bundle size limits (< 200KB gzipped), Core Web Vitals targets, MongoDB query optimization, code splitting, and performance monitoring
 

@@ -21,6 +21,12 @@
       </button>
     </div>
 
+    <!-- Export Button -->
+    <button v-if="transactions.length > 0" class="export-btn" @click="showExportModal = true">
+      <i class="pi pi-download" />
+      <span>Export to CSV</span>
+    </button>
+
     <!-- Transaction List -->
     <div class="transactions-section">
       <h3>Recent Transactions</h3>
@@ -42,12 +48,30 @@
             <p class="transaction-category">{{ getCategoryName(transaction.categoryId) }}</p>
             <p class="transaction-description">{{ transaction.description }}</p>
           </div>
-          <p class="transaction-amount" :class="transaction.type">
-            {{ transaction.type === 'expense' ? '-' : '+' }}€{{ transaction.amount.toFixed(2) }}
-          </p>
+          <div class="transaction-right">
+            <p class="transaction-amount" :class="transaction.type">
+              {{ transaction.type === 'expense' ? '-' : '+' }}€{{ transaction.amount.toFixed(2) }}
+            </p>
+            <button
+              class="delete-btn"
+              aria-label="Delete transaction"
+              @click="confirmDelete(transaction)"
+            >
+              <i class="pi pi-trash" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Modals -->
+    <ModalDeleteConfirmation
+      v-model="showDeleteModal"
+      :loading="deleting"
+      @confirm="handleDelete"
+      @cancel="showDeleteModal = false"
+    />
+    <ModalExportCSV v-model="showExportModal" />
   </div>
 </template>
 
@@ -65,12 +89,17 @@ const {
   transactions,
   loading: transactionsLoading,
   error: transactionsError,
-  fetchTransactions
+  fetchTransactions,
+  deleteTransaction
 } = useTransactions()
 const { categories, fetchCategories } = useCategories()
 
 const periods = ['Weekly', 'Monthly', 'Yearly']
 const selectedPeriod = ref('Monthly')
+const showDeleteModal = ref(false)
+const showExportModal = ref(false)
+const transactionToDelete = ref<string | null>(null)
+const deleting = ref(false)
 
 // Calculate available money (incomes - expenses)
 const availableMoney = computed(() => {
@@ -87,6 +116,28 @@ const availableMoney = computed(() => {
 const getCategoryName = (categoryId: string) => {
   const category = categories.value.find(c => c._id === categoryId)
   return category?.name || 'Unknown'
+}
+
+// Confirm delete
+const confirmDelete = (transaction: (typeof transactions.value)[0]) => {
+  transactionToDelete.value = transaction._id
+  showDeleteModal.value = true
+}
+
+// Handle delete
+const handleDelete = async () => {
+  if (!transactionToDelete.value) return
+
+  deleting.value = true
+  try {
+    await deleteTransaction(transactionToDelete.value)
+    showDeleteModal.value = false
+    transactionToDelete.value = null
+  } catch (error) {
+    console.error('Failed to delete transaction:', error)
+  } finally {
+    deleting.value = false
+  }
 }
 
 // Fetch data on mount
@@ -217,5 +268,51 @@ onMounted(async () => {
 
 .error {
   color: var(--color-error);
+}
+
+.export-btn {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  color: var(--color-gray-600);
+  font-size: var(--font-size-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-300);
+}
+
+.transaction-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.delete-btn {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: #fee2e2;
+  border-radius: 50%;
+  color: var(--color-error);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #fee;
 }
 </style>

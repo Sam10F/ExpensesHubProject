@@ -32,11 +32,8 @@
       </NuxtLink>
     </nav>
 
-    <!-- Add Transaction Modal (placeholder for now) -->
-    <UIModal v-model="showAddModal" aria-label="Add Transaction">
-      <h2>Add Transaction</h2>
-      <p>Modal implementation coming in Milestone 3</p>
-    </UIModal>
+    <!-- Add Transaction Modal -->
+    <ModalAddTransaction v-model="showAddModal" @saved="handleTransactionSaved" />
   </div>
 </template>
 
@@ -63,6 +60,13 @@ const pageTitle = computed(() => {
 })
 
 const isSettingsPage = computed(() => route.path === '/settings')
+
+const handleTransactionSaved = () => {
+  // Refresh transaction list on home page
+  if (route.path === '/') {
+    window.location.reload()
+  }
+}
 </script>
 
 <style scoped>
