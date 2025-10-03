@@ -7,14 +7,38 @@
 
 ## Overview
 
-This document provides a detailed task breakdown for implementing ExpensesHub PWA. Tasks are organized by milestone and include estimates, dependencies, and constitutional compliance requirements.
+This document provides dependency-ordered, actionable tasks for implementing ExpensesHub PWA. Tasks marked with **[P]** can be executed in parallel. The order follows TDD principles: Tests → Models → Implementation.
 
 **Legend:**
 
+- **[P]** = Can be executed in parallel with other [P] tasks at same level
 - **Priority:** Critical | High | Medium | Low
-- **Category:** Feature Development | Code Quality | Testing | UX Enhancement | Performance | Infrastructure | Documentation
-- **Estimate:** Time in hours
-- **Status:** Not Started | In Progress | In Review | Done
+- **Estimate:** Hours
+- **File Path:** Exact file to create/modify
+
+## Parallel Execution with Task Agent
+
+Tasks marked [P] can run simultaneously when they modify different files. Example batches:
+
+```bash
+# Batch 1: Models (T012, T012b, T012c) - All parallel, different files
+Task: Create Transaction model in server/models/Transaction.ts
+Task: Create Category model in server/models/Category.ts
+Task: Create Settings model in server/models/Settings.ts
+
+# Batch 2: API Routes (T032a-e) - All parallel, different files
+Task: Create GET /api/transactions in server/api/transactions/index.get.ts
+Task: Create POST /api/transactions in server/api/transactions/index.post.ts
+Task: Create PATCH /api/transactions/[id] in server/api/transactions/[id].patch.ts
+
+# Batch 3: Chart Components (T053-T056) - All parallel, different files
+Task: Create BarChart component in components/Chart/BarChart.vue
+Task: Create PieChart component in components/Chart/PieChart.vue
+Task: Create DoughnutChart component in components/Chart/DoughnutChart.vue
+Task: Create LineChart component in components/Chart/LineChart.vue
+```
+
+**TDD Approach:** Write Playwright tests BEFORE implementing features where possible.
 
 ---
 
@@ -29,7 +53,14 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
 - **Category:** Infrastructure
 - **Estimate:** 2h
 - **Dependencies:** None
+- **File:** `nuxt.config.ts`, `tsconfig.json`, `package.json`
 - **Description:** Create Nuxt 3 project with TypeScript strict mode
+- **Commands:**
+  ```bash
+  pnpm dlx nuxi@latest init .
+  # Configure TypeScript strict mode
+  # Update nuxt.config.ts with initial settings
+  ```
 - **Acceptance Criteria:**
   - [ ] Nuxt 3 project created with `nuxi init`
   - [ ] TypeScript strict mode enabled in `tsconfig.json`
@@ -182,19 +213,51 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
   - [ ] Base styles in `assets/css/main.css`
 - **Constitutional Compliance:** UX Consistency (typography)
 
-### T012: Create MongoDB Models
+### T012: [P] Create Transaction Model
 
 - **Priority:** Critical
 - **Category:** Infrastructure
-- **Estimate:** 4h
+- **Estimate:** 1.5h
 - **Dependencies:** T002
-- **Description:** Define Mongoose schemas for Transaction, Category, Settings
+- **File:** `server/models/Transaction.ts`
+- **Description:** Define Mongoose schema for Transaction with validation
 - **Acceptance Criteria:**
-  - [ ] Transaction model with validation
-  - [ ] Category model with validation
-  - [ ] Settings model with validation
-  - [ ] Indexes defined
-  - [ ] Models exported from `server/models/`
+  - [ ] ITransaction interface defined
+  - [ ] TransactionSchema with all fields and validation
+  - [ ] Indexes: date, categoryId, type
+  - [ ] Virtual for formattedAmount
+  - [ ] JSDoc comments
+- **Constitutional Compliance:** Code Quality (type safety, documentation)
+
+### T012b: [P] Create Category Model
+
+- **Priority:** Critical
+- **Category:** Infrastructure
+- **Estimate:** 1.5h
+- **Dependencies:** T002
+- **File:** `server/models/Category.ts`
+- **Description:** Define Mongoose schema for Category with validation
+- **Acceptance Criteria:**
+  - [ ] ICategory interface defined
+  - [ ] CategorySchema with all fields and validation
+  - [ ] Indexes: type, order
+  - [ ] Unique constraint on name+type
+  - [ ] JSDoc comments
+- **Constitutional Compliance:** Code Quality (type safety, documentation)
+
+### T012c: [P] Create Settings Model
+
+- **Priority:** Critical
+- **Category:** Infrastructure
+- **Estimate:** 1h
+- **Dependencies:** T002
+- **File:** `server/models/Settings.ts`
+- **Description:** Define Mongoose schema for Settings
+- **Acceptance Criteria:**
+  - [ ] ISettings interface defined
+  - [ ] SettingsSchema with defaults
+  - [ ] Enum validation for all fields
+  - [ ] JSDoc comments
 - **Constitutional Compliance:** Code Quality (type safety, documentation)
 
 ### T013: Create Database Initialization Script
@@ -202,14 +265,23 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
 - **Priority:** High
 - **Category:** Infrastructure
 - **Estimate:** 2h
-- **Dependencies:** T012
+- **Dependencies:** T012, T012b, T012c
+- **File:** `server/utils/initDatabase.ts`, `server/plugins/mongodb.ts`
 - **Description:** Script to initialize database with default categories
+- **Commands:**
+  ```typescript
+  // Create default expense categories: Food, Transport, Bills, Shopping, Other
+  // Create default income categories: Salary, Freelance, Gifts, Other
+  // Create default settings
+  // Make idempotent (check before inserting)
+  ```
 - **Acceptance Criteria:**
-  - [ ] Default expense categories created
-  - [ ] Default income categories created
+  - [ ] Default expense categories created (5 categories with icons/colors)
+  - [ ] Default income categories created (4 categories with icons/colors)
   - [ ] Default settings created
   - [ ] Idempotent (safe to run multiple times)
   - [ ] Runs automatically on server start
+  - [ ] Logs success/failure clearly
 - **Constitutional Compliance:** Code Quality (error handling)
 
 ### T014: Setup CI/CD Pipeline
@@ -250,65 +322,66 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
 **Target Date:** 2025-10-17  
 **Total Tasks:** 15
 
-### T016: Create Button Component
+### T016: [P] Create Button Component
 
 - **Priority:** High
 - **Category:** Feature Development
 - **Estimate:** 2h
 - **Dependencies:** T010
+- **File:** `components/UI/Button.vue`
 - **Description:** Reusable button component with variants
 - **Acceptance Criteria:**
-  - [ ] Primary, secondary, danger button variants
-  - [ ] 44px height (touch target)
-  - [ ] Disabled state
-  - [ ] Loading state
-  - [ ] Keyboard accessible
-  - [ ] ARIA labels
+  - [ ] Props: variant (primary/secondary/danger), loading, disabled
+  - [ ] 44px height (constitutional touch target requirement)
+  - [ ] Disabled and loading states
+  - [ ] Emits @click event
+  - [ ] role="button", proper aria-labels
 - **Constitutional Compliance:** UX Consistency, Accessibility
 
-### T017: Create Input Component
+### T017: [P] Create Input Component
 
 - **Priority:** High
 - **Category:** Feature Development
 - **Estimate:** 2h
 - **Dependencies:** T010
+- **File:** `components/UI/Input.vue`
 - **Description:** Reusable input field component
 - **Acceptance Criteria:**
-  - [ ] Text, number input types
-  - [ ] Label support
-  - [ ] Error state
-  - [ ] 48px height
-  - [ ] Proper focus styles
-  - [ ] ARIA labels
+  - [ ] Props: type, label, error, placeholder, modelValue
+  - [ ] 48px height, proper focus styles
+  - [ ] Error state display
+  - [ ] v-model support, emits update:modelValue
+  - [ ] aria-label, aria-describedby for errors
 - **Constitutional Compliance:** UX Consistency, Accessibility
 
-### T018: Create Dropdown Component
+### T018: [P] Create Dropdown Component
 
 - **Priority:** High
 - **Category:** Feature Development
-- **Estimate:** 3h
+- **Estimate:** 2h
 - **Dependencies:** T010
-- **Description:** Dropdown/select component (or use PrimeVue Dropdown)
+- **File:** `components/UI/Dropdown.vue` (or use PrimeVue Dropdown directly)
+- **Description:** Dropdown/select component wrapping PrimeVue
 - **Acceptance Criteria:**
-  - [ ] Searchable options
-  - [ ] Keyboard navigation
-  - [ ] Custom styling
-  - [ ] Loading state
-  - [ ] ARIA labels
+  - [ ] Wrap PrimeVue Dropdown with custom styling
+  - [ ] Props: options, modelValue, placeholder
+  - [ ] Keyboard navigation (Tab, Arrow keys)
+  - [ ] aria-label, proper semantics
 - **Constitutional Compliance:** UX Consistency, Accessibility
 
-### T019: Create Card Component
+### T019: [P] Create Card Component
 
 - **Priority:** Medium
 - **Category:** Feature Development
 - **Estimate:** 1h
 - **Dependencies:** T010
+- **File:** `components/UI/Card.vue`
 - **Description:** Card container component
 - **Acceptance Criteria:**
-  - [ ] 12px border radius
-  - [ ] White background
-  - [ ] Consistent padding
-  - [ ] Shadow optional
+  - [ ] 12px border radius, white background
+  - [ ] Consistent 16px padding
+  - [ ] Optional shadow prop
+  - [ ] Slot for content
 - **Constitutional Compliance:** UX Consistency
 
 ### T020: Create Modal Base Component
@@ -514,64 +587,70 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
   - [ ] JSDoc documentation
 - **Constitutional Compliance:** Code Quality (documentation, error handling)
 
-### T032: Create API Route - Get Transactions
+### T032: [P] Create API Route - Get Transactions
 
 - **Priority:** Critical
 - **Category:** Feature Development
-- **Estimate:** 3h
-- **Dependencies:** T012
+- **Estimate:** 2h
+- **Dependencies:** T012, T012b
+- **File:** `server/api/transactions/index.get.ts`
 - **Description:** API endpoint to fetch transactions with filtering
 - **Acceptance Criteria:**
-  - [ ] GET /api/transactions
-  - [ ] Query params: startDate, endDate, type
-  - [ ] MongoDB query with indexes
-  - [ ] Sorted by date (desc)
-  - [ ] Error handling
-  - [ ] Input validation
+  - [ ] GET /api/transactions with query params
+  - [ ] Parse startDate, endDate, type from query
+  - [ ] MongoDB query using indexes
+  - [ ] Populate categoryId
+  - [ ] Sort by date desc
+  - [ ] Error handling with try-catch
+  - [ ] Returns Transaction[]
 - **Constitutional Compliance:** Code Quality, Performance (query optimization)
 
-### T033: Create API Route - Create Transaction
+### T033: [P] Create API Route - Create Transaction
 
 - **Priority:** Critical
 - **Category:** Feature Development
-- **Estimate:** 3h
+- **Estimate:** 2h
 - **Dependencies:** T012
+- **File:** `server/api/transactions/index.post.ts`
 - **Description:** API endpoint to create new transaction
 - **Acceptance Criteria:**
   - [ ] POST /api/transactions
-  - [ ] Zod schema validation
-  - [ ] Create in MongoDB
-  - [ ] Return created transaction
-  - [ ] Error handling
+  - [ ] Zod schema validation (amount, categoryId, type, date)
+  - [ ] Create in MongoDB using Transaction.create()
+  - [ ] Return created transaction with 201 status
+  - [ ] Error handling (400 for validation, 500 for server)
 - **Constitutional Compliance:** Code Quality (validation, error handling)
 
-### T034: Create API Route - Update Transaction
+### T034: [P] Create API Route - Update Transaction
 
 - **Priority:** High
 - **Category:** Feature Development
-- **Estimate:** 2h
+- **Estimate:** 1.5h
 - **Dependencies:** T012
+- **File:** `server/api/transactions/[id].patch.ts`
 - **Description:** API endpoint to update transaction
 - **Acceptance Criteria:**
-  - [ ] PATCH /api/transactions/[id]
-  - [ ] Validation
-  - [ ] Update in MongoDB
+  - [ ] PATCH /api/transactions/:id
+  - [ ] Zod validation for updates
+  - [ ] findByIdAndUpdate in MongoDB
   - [ ] Return updated transaction
-  - [ ] 404 if not found
+  - [ ] 404 if not found, 400 for validation
 - **Constitutional Compliance:** Code Quality
 
-### T035: Create API Route - Delete Transaction
+### T035: [P] Create API Route - Delete Transaction
 
 - **Priority:** High
 - **Category:** Feature Development
-- **Estimate:** 2h
+- **Estimate:** 1.5h
 - **Dependencies:** T012
+- **File:** `server/api/transactions/[id].delete.ts`
 - **Description:** API endpoint to delete transaction
 - **Acceptance Criteria:**
-  - [ ] DELETE /api/transactions/[id]
-  - [ ] Delete from MongoDB
-  - [ ] 204 No Content response
+  - [ ] DELETE /api/transactions/:id
+  - [ ] findByIdAndDelete in MongoDB
+  - [ ] 204 No Content on success
   - [ ] 404 if not found
+  - [ ] Error handling
 - **Constitutional Compliance:** Code Quality
 
 ### T036: Implement Available Money Card
@@ -845,69 +924,69 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
   - [ ] Cached for 5 minutes
 - **Constitutional Compliance:** Performance (query optimization)
 
-### T053: Create Bar Chart Component
+### T053: [P] Create Bar Chart Component
 
 - **Priority:** Critical
 - **Category:** Feature Development
-- **Estimate:** 4h
+- **Estimate:** 3h
 - **Dependencies:** T004, T051
+- **File:** `components/Chart/BarChart.vue`
 - **Description:** Bar chart component with vue-chartjs
 - **Acceptance Criteria:**
-  - [ ] Vertical bar chart
-  - [ ] Category colors
-  - [ ] Y-axis: amounts
+  - [ ] Import Bar from vue-chartjs
+  - [ ] Category colors from design system
+  - [ ] Y-axis: amounts with € symbol
   - [ ] X-axis: category names
-  - [ ] Grid lines
-  - [ ] Responsive
-  - [ ] Tooltips
-  - [ ] Accessible (aria-label)
+  - [ ] Grid lines, responsive sizing
+  - [ ] Tooltips with formatted values
+  - [ ] aria-label describing chart data
 - **Constitutional Compliance:** UX Consistency, Accessibility
 
-### T054: Create Pie Chart Component
+### T054: [P] Create Pie Chart Component
+
+- **Priority:** High
+- **Category:** Feature Development
+- **Estimate:** 2.5h
+- **Dependencies:** T004, T051
+- **File:** `components/Chart/PieChart.vue`
+- **Description:** Pie chart component
+- **Acceptance Criteria:**
+  - [ ] Import Pie from vue-chartjs
+  - [ ] Category colors and labels
+  - [ ] Legend with percentages
+  - [ ] Tooltips, responsive sizing
+  - [ ] aria-label describing chart
+- **Constitutional Compliance:** UX Consistency, Accessibility
+
+### T055: [P] Create Doughnut Chart Component
+
+- **Priority:** High
+- **Category:** Feature Development
+- **Estimate:** 2.5h
+- **Dependencies:** T004, T051
+- **File:** `components/Chart/DoughnutChart.vue`
+- **Description:** Doughnut chart component (pie with center hole)
+- **Acceptance Criteria:**
+  - [ ] Import Doughnut from vue-chartjs
+  - [ ] Same features as pie chart
+  - [ ] Center cutout configuration
+  - [ ] Responsive, accessible
+- **Constitutional Compliance:** UX Consistency, Accessibility
+
+### T056: [P] Create Line Chart Component
 
 - **Priority:** High
 - **Category:** Feature Development
 - **Estimate:** 3h
 - **Dependencies:** T004, T051
-- **Description:** Pie chart component
+- **File:** `components/Chart/LineChart.vue`
+- **Description:** Line chart component for trends over time
 - **Acceptance Criteria:**
-  - [ ] Pie chart with category slices
-  - [ ] Category colors
-  - [ ] Legend with percentages
-  - [ ] Tooltips
-  - [ ] Responsive
-  - [ ] Accessible
-- **Constitutional Compliance:** UX Consistency, Accessibility
-
-### T055: Create Doughnut Chart Component
-
-- **Priority:** High
-- **Category:** Feature Development
-- **Estimate:** 2h
-- **Dependencies:** T054
-- **Description:** Doughnut chart component (similar to pie)
-- **Acceptance Criteria:**
-  - [ ] Doughnut chart (pie with hole)
-  - [ ] Same features as pie chart
-  - [ ] Responsive
-  - [ ] Accessible
-- **Constitutional Compliance:** UX Consistency, Accessibility
-
-### T056: Create Line Chart Component
-
-- **Priority:** High
-- **Category:** Feature Development
-- **Estimate:** 4h
-- **Dependencies:** T004, T051
-- **Description:** Line chart component for trends
-- **Acceptance Criteria:**
-  - [ ] Line chart over time
-  - [ ] X-axis: dates
-  - [ ] Y-axis: amounts
-  - [ ] Multiple lines for categories (optional)
-  - [ ] Grid lines
-  - [ ] Responsive
-  - [ ] Accessible
+  - [ ] Import Line from vue-chartjs
+  - [ ] X-axis: dates, Y-axis: amounts
+  - [ ] Category colors for multiple lines
+  - [ ] Grid lines, responsive
+  - [ ] Tooltips, accessible
 - **Constitutional Compliance:** UX Consistency, Accessibility
 
 ### T057: Create Dynamic Chart Container
@@ -2100,7 +2179,72 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
 | Documentation       | 8       | 24h         |
 | **TOTAL**           | **130** | **434h**    |
 
-**Estimated Timeline:** 6 weeks (assuming 2 developers working 40h/week = 480h capacity)
+**Estimated Timeline:** 6 weeks (2 developers @ 40h/week = 480h capacity)
+
+---
+
+## Parallel Execution Batches
+
+Execute these task batches in parallel for maximum efficiency:
+
+### Batch 1: MongoDB Models (After T002)
+
+```bash
+[P] T012: server/models/Transaction.ts
+[P] T012b: server/models/Category.ts
+[P] T012c: server/models/Settings.ts
+```
+
+### Batch 2: Transaction API Routes (After T012)
+
+```bash
+[P] T032: server/api/transactions/index.get.ts
+[P] T033: server/api/transactions/index.post.ts
+[P] T034: server/api/transactions/[id].patch.ts
+[P] T035: server/api/transactions/[id].delete.ts
+```
+
+### Batch 3: Base UI Components (After T010)
+
+```bash
+[P] T016: components/UI/Button.vue
+[P] T017: components/UI/Input.vue
+[P] T018: components/UI/Dropdown.vue
+[P] T019: components/UI/Card.vue
+```
+
+### Batch 4: Chart Components (After T051)
+
+```bash
+[P] T053: components/Chart/BarChart.vue
+[P] T054: components/Chart/PieChart.vue
+[P] T055: components/Chart/DoughnutChart.vue
+[P] T056: components/Chart/LineChart.vue
+```
+
+### Batch 5: Category API Routes (After T012b)
+
+```bash
+[P] GET /api/categories
+[P] POST /api/categories
+[P] PATCH /api/categories/[id]
+[P] DELETE /api/categories/[id]
+```
+
+### Batch 6: Settings API Routes (After T012c)
+
+```bash
+[P] GET /api/settings
+[P] PATCH /api/settings
+```
+
+### Batch 7: Playwright Tests - Pages (After implementations complete)
+
+```bash
+[P] tests/e2e/landing.spec.ts
+[P] tests/e2e/charts.spec.ts
+[P] tests/e2e/settings.spec.ts
+```
 
 ---
 
@@ -2108,13 +2252,13 @@ This document provides a detailed task breakdown for implementing ExpensesHub PW
 
 All 130 tasks are aligned with constitutional principles:
 
-- **Code Quality Excellence:** 72 tasks explicitly enforce code quality standards
-- **Testing Standards (Playwright):** 24 tasks for comprehensive E2E testing
-- **User Experience Consistency:** 68 tasks ensure consistent, accessible UX
-- **Performance Requirements:** 28 tasks optimize performance and meet Core Web Vitals
+- **Code Quality Excellence:** 72 tasks enforce TypeScript strict, JSDoc, < 50 lines, code review
+- **Testing Standards (Playwright):** 24 tasks for E2E testing with POM pattern, cross-browser
+- **User Experience Consistency:** 68 tasks ensure design system, WCAG 2.1 AA, responsive
+- **Performance Requirements:** 28 tasks optimize bundle size, Core Web Vitals, MongoDB queries
 
 ---
 
-**Document Status:** Complete  
+**Document Status:** Complete with parallel execution guidance  
 **Last Updated:** 2025-10-03  
 **Next Update:** Weekly during implementation
