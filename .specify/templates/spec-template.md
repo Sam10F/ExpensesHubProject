@@ -1,116 +1,154 @@
-# Feature Specification: [FEATURE NAME]
+# Specification: [FEATURE_NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**Created:** [DATE]  
+**Status:** [Draft/Review/Approved/Implemented]  
+**Author:** [AUTHOR_NAME]  
+**Reviewers:** [REVIEWER_NAMES]
 
-## Execution Flow (main)
-```
-1. Parse user description from Input
-   → If empty: ERROR "No feature description provided"
-2. Extract key concepts from description
-   → Identify: actors, actions, data, constraints
-3. For each unclear aspect:
-   → Mark with [NEEDS CLARIFICATION: specific question]
-4. Fill User Scenarios & Testing section
-   → If no clear user flow: ERROR "Cannot determine user scenarios"
-5. Generate Functional Requirements
-   → Each requirement must be testable
-   → Mark ambiguous requirements
-6. Identify Key Entities (if data involved)
-7. Run Review Checklist
-   → If any [NEEDS CLARIFICATION]: WARN "Spec has uncertainties"
-   → If implementation details found: ERROR "Remove tech details"
-8. Return: SUCCESS (spec ready for planning)
-```
+## Overview
 
----
+[High-level description of the feature or change]
 
-## ⚡ Quick Guidelines
-- ✅ Focus on WHAT users need and WHY
-- ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
-- 👥 Written for business stakeholders, not developers
-
-### Section Requirements
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
-- When a section doesn't apply, remove it entirely (don't leave as "N/A")
-
-### For AI Generation
-When creating this spec from a user prompt:
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
-2. **Don't guess**: If the prompt doesn't specify something (e.g., "login system" without auth method), mark it
-3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
-4. **Common underspecified areas**:
-   - User types and permissions
-   - Data retention/deletion policies  
-   - Performance targets and scale
-   - Error handling behaviors
-   - Integration requirements
-   - Security/compliance needs
-
----
-
-## User Scenarios & Testing *(mandatory)*
-
-### Primary User Story
-[Describe the main user journey in plain language]
-
-### Acceptance Scenarios
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
-### Edge Cases
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
-
-## Requirements *(mandatory)*
+## Requirements
 
 ### Functional Requirements
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
 
-*Example of marking unclear requirements:*
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+1. **[Requirement 1]**
 
-### Key Entities *(include if feature involves data)*
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+   - Description: [Details]
+   - Acceptance Criteria:
+     - [ ] [Criterion 1]
+     - [ ] [Criterion 2]
 
----
+2. **[Requirement 2]**
+   - Description: [Details]
+   - Acceptance Criteria:
+     - [ ] [Criterion 1]
+     - [ ] [Criterion 2]
 
-## Review & Acceptance Checklist
-*GATE: Automated checks run during main() execution*
+### Non-Functional Requirements
 
-### Content Quality
-- [ ] No implementation details (languages, frameworks, APIs)
-- [ ] Focused on user value and business needs
-- [ ] Written for non-technical stakeholders
-- [ ] All mandatory sections completed
+#### Code Quality (Constitutional Principle 1)
 
-### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain
-- [ ] Requirements are testable and unambiguous  
-- [ ] Success criteria are measurable
-- [ ] Scope is clearly bounded
-- [ ] Dependencies and assumptions identified
+- [ ] TypeScript strict mode enabled
+- [ ] All public APIs documented with JSDoc
+- [ ] Functions under 50 lines where possible
+- [ ] ESLint and Prettier configurations applied
+- [ ] Error handling strategy defined
 
----
+#### Testing Standards (Constitutional Principle 2)
 
-## Execution Status
-*Updated by main() during processing*
+- [ ] E2E test scenarios defined for all user paths
+- [ ] Playwright test suite planned
+- [ ] Page Object Models designed
+- [ ] Test coverage targets: [X]% of critical paths
 
-- [ ] User description parsed
-- [ ] Key concepts extracted
-- [ ] Ambiguities marked
-- [ ] User scenarios defined
-- [ ] Requirements generated
-- [ ] Entities identified
-- [ ] Review checklist passed
+#### User Experience (Constitutional Principle 3)
 
----
+- [ ] Design system components identified
+- [ ] Responsive breakpoints defined (mobile/tablet/desktop)
+- [ ] WCAG 2.1 AA compliance verified
+- [ ] Loading states designed
+- [ ] Error handling UX defined
+- [ ] Interaction feedback specified
+
+#### Performance (Constitutional Principle 4)
+
+- [ ] Bundle size impact analyzed
+- [ ] Core Web Vitals targets defined
+- [ ] API response time requirements: [X]ms
+- [ ] Caching strategy specified
+- [ ] Performance monitoring setup
+
+## Design
+
+### User Interface
+
+[Mockups, wireframes, or design links]
+
+### Architecture
+
+```
+[Architecture diagrams, component hierarchy, or system design]
+```
+
+### Data Models
+
+```typescript
+// [Type definitions or schema]
+```
+
+### API Contracts
+
+```typescript
+// [API endpoint definitions, request/response types]
+```
+
+## Technical Approach
+
+### Implementation Strategy
+
+[Step-by-step approach to implementation]
+
+### Technology Choices
+
+- **Framework/Library:** [Technology + rationale]
+- **Dependencies:** [New dependencies + justification]
+- **Patterns:** [Design patterns to be used]
+
+### Migration Strategy
+
+[If applicable, how to migrate from current state to new state]
+
+## Testing Strategy
+
+### Playwright E2E Tests
+
+1. **Test Scenario 1:** [Description]
+
+   - Steps: [Test steps]
+   - Expected: [Expected outcomes]
+
+2. **Test Scenario 2:** [Description]
+   - Steps: [Test steps]
+   - Expected: [Expected outcomes]
+
+### Edge Cases
+
+- [Edge case 1]
+- [Edge case 2]
+
+## Rollout Plan
+
+1. [Phase 1]
+2. [Phase 2]
+3. [Phase 3]
+
+## Security Considerations
+
+- [Security consideration 1]
+- [Security consideration 2]
+
+## Monitoring & Observability
+
+- **Metrics:** [What metrics to track]
+- **Alerts:** [What to alert on]
+- **Logging:** [What to log]
+
+## Open Questions
+
+- [ ] [Question 1]
+- [ ] [Question 2]
+
+## References
+
+- [Link to related specs]
+- [Link to design docs]
+- [Link to research]
+
+## Approval
+
+- [ ] Technical review completed
+- [ ] Constitutional compliance verified
+- [ ] Design approved
+- [ ] Ready for implementation
