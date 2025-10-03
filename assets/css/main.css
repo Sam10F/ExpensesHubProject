@@ -1,0 +1,152 @@
+/* ExpensesHub - Main Styles */
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Design Tokens - Based on DesignSVG specifications */
+:root {
+  /* Colors - Primary */
+  --color-primary: #10b981;
+  --color-success-light: #dcfce7;
+  --color-error: #ef4444;
+
+  /* Colors - Accents */
+  --color-blue: #3b82f6;
+  --color-orange: #f59e0b;
+  --color-purple: #8b5cf6;
+  --color-pink: #ec4899;
+
+  /* Colors - Neutrals */
+  --color-gray-900: #0f172a;
+  --color-gray-600: #475569;
+  --color-gray-500: #64748b;
+  --color-gray-400: #94a3b8;
+  --color-gray-300: #cbd5e1;
+  --color-gray-200: #e2e8f0;
+  --color-gray-100: #f1f5f9;
+  --color-gray-50: #f8fafc;
+  --color-background: #fafafa;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
+  --font-size-h1: 24px;
+  --font-size-h2: 20px;
+  --font-size-h3: 16px;
+  --font-size-body: 14px;
+  --font-size-caption: 12px;
+  --font-size-label: 13px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Spacing - 8px grid */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Component Sizes */
+  --button-height: 44px;
+  --input-height: 48px;
+  --nav-height: 68px;
+  --header-height: 64px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-gray-900);
+  background-color: var(--color-background);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.4;
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-error {
+  color: var(--color-error);
+}
+.text-gray-500 {
+  color: var(--color-gray-500);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-white {
+  background-color: var(--color-white);
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
