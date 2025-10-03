@@ -10,14 +10,19 @@ import { initializeDatabase } from '../utils/initDatabase'
 export default defineNitroPlugin(async nitroApp => {
   const config = useRuntimeConfig()
 
-  try {
-    // Check if MongoDB URI is configured
-    if (!config.mongodbUri) {
-      console.warn('⚠️ MongoDB URI not configured. Skipping database connection.')
-      console.warn('Please set MONGODB_URI environment variable.')
-      return
-    }
+  // Check if MongoDB URI is configured
+  if (!config.mongodbUri) {
+    console.warn('⚠️ MongoDB URI not configured. Running without database.')
+    console.warn('ℹ️  To enable database features:')
+    console.warn(
+      '   1. Create a free MongoDB Atlas account: https://www.mongodb.com/cloud/atlas/register'
+    )
+    console.warn('   2. Add MONGODB_URI to your .env file')
+    console.warn('   3. Restart the server')
+    return
+  }
 
+  try {
     // Connect to MongoDB
     await mongoose.connect(config.mongodbUri, {
       dbName: config.mongodbDbName || 'expenseshub_dev',
@@ -42,6 +47,7 @@ export default defineNitroPlugin(async nitroApp => {
     if (error instanceof Error) {
       console.error(`Error details: ${error.message}`)
     }
-    throw error
+    console.error('ℹ️  The server will continue running, but database features will not work.')
+    // Don't throw error - let the server continue running
   }
 })
