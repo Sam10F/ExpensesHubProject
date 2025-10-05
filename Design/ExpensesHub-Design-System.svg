@@ -1,0 +1,228 @@
+<svg width="375" height="1400" viewBox="0 0 375 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="375" height="1400" fill="#FAFAFA"/>
+  
+  <!-- Header -->
+  <text x="24" y="48" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#0F172A">
+    ExpensesHub
+  </text>
+  <text x="24" y="72" font-family="Inter, sans-serif" font-size="16" font-weight="500" fill="#64748B">
+    Design System
+  </text>
+  
+  <!-- Color Palette Section -->
+  <g id="color-palette">
+    <text x="24" y="116" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0F172A">
+      Color Palette
+    </text>
+    
+    <!-- Primary Color -->
+    <g id="primary-color">
+      <rect x="24" y="132" width="327" height="64" rx="8" fill="#10B981"/>
+      <text x="40" y="162" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF">
+        Primary
+      </text>
+      <text x="40" y="182" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.9">
+        #10B981 • rgb(16, 185, 129)
+      </text>
+    </g>
+    
+    <!-- Success Color -->
+    <g id="success-color">
+      <rect x="24" y="204" width="160" height="56" rx="8" fill="#DCFCE7"/>
+      <text x="40" y="230" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0F172A">
+        Success Light
+      </text>
+      <text x="40" y="246" font-family="Inter, sans-serif" font-size="11" fill="#64748B">
+        #DCFCE7
+      </text>
+    </g>
+    
+    <!-- Error/Danger Color -->
+    <g id="error-color">
+      <rect x="191" y="204" width="160" height="56" rx="8" fill="#EF4444"/>
+      <text x="207" y="230" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">
+        Error/Expense
+      </text>
+      <text x="207" y="246" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF" opacity="0.9">
+        #EF4444
+      </text>
+    </g>
+    
+    <!-- Blue Accent -->
+    <g id="blue-accent">
+      <rect x="24" y="268" width="105" height="56" rx="8" fill="#3B82F6"/>
+      <text x="40" y="294" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">
+        Blue
+      </text>
+      <text x="40" y="310" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF" opacity="0.9">
+        #3B82F6
+      </text>
+    </g>
+    
+    <!-- Orange Accent -->
+    <g id="orange-accent">
+      <rect x="135" y="268" width="105" height="56" rx="8" fill="#F59E0B"/>
+      <text x="151" y="294" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">
+        Orange
+      </text>
+      <text x="151" y="310" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF" opacity="0.9">
+        #F59E0B
+      </text>
+    </g>
+    
+    <!-- Purple Accent -->
+    <g id="purple-accent">
+      <rect x="246" y="268" width="105" height="56" rx="8" fill="#8B5CF6"/>
+      <text x="262" y="294" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">
+        Purple
+      </text>
+      <text x="262" y="310" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF" opacity="0.9">
+        #8B5CF6
+      </text>
+    </g>
+    
+    <!-- Neutral Colors -->
+    <text x="24" y="356" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#0F172A">
+      Neutral Colors
+    </text>
+    
+    <rect x="24" y="368" width="68" height="48" rx="6" fill="#0F172A"/>
+    <text x="30" y="424" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 900</text>
+    
+    <rect x="96" y="368" width="68" height="48" rx="6" fill="#475569"/>
+    <text x="102" y="424" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 600</text>
+    
+    <rect x="168" y="368" width="68" height="48" rx="6" fill="#64748B"/>
+    <text x="174" y="424" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 500</text>
+    
+    <rect x="240" y="368" width="68" height="48" rx="6" fill="#94A3B8"/>
+    <text x="246" y="424" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 400</text>
+    
+    <rect x="24" y="436" width="68" height="48" rx="6" fill="#CBD5E1" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="30" y="492" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 300</text>
+    
+    <rect x="96" y="436" width="68" height="48" rx="6" fill="#E2E8F0" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="102" y="492" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 200</text>
+    
+    <rect x="168" y="436" width="68" height="48" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="174" y="492" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 100</text>
+    
+    <rect x="240" y="436" width="68" height="48" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="246" y="492" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Gray 50</text>
+  </g>
+  
+  <!-- Typography Section -->
+  <g id="typography">
+    <text x="24" y="540" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0F172A">
+      Typography
+    </text>
+    
+    <rect x="24" y="556" width="327" height="280" rx="12" fill="#FFFFFF"/>
+    
+    <!-- Font Family -->
+    <text x="40" y="584" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      FONT FAMILY
+    </text>
+    <text x="40" y="608" font-family="Inter, sans-serif" font-size="16" fill="#0F172A">
+      Inter (Primary), sans-serif (Fallback)
+    </text>
+    
+    <!-- Heading Styles -->
+    <text x="40" y="648" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      HEADINGS
+    </text>
+    <text x="40" y="680" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#0F172A">
+      H1 - 24px Bold
+    </text>
+    <text x="40" y="712" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#0F172A">
+      H2 - 20px Bold
+    </text>
+    <text x="40" y="740" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#0F172A">
+      H3 - 16px Semibold
+    </text>
+    
+    <!-- Body Styles -->
+    <text x="40" y="776" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      BODY TEXT
+    </text>
+    <text x="40" y="800" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">
+      Body - 14px Regular
+    </text>
+    <text x="40" y="824" font-family="Inter, sans-serif" font-size="12" fill="#64748B">
+      Caption - 12px Regular
+    </text>
+  </g>
+  
+  <!-- Spacing Section -->
+  <g id="spacing">
+    <text x="24" y="876" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0F172A">
+      Spacing System
+    </text>
+    <text x="24" y="900" font-family="Inter, sans-serif" font-size="13" fill="#64748B">
+      Based on 8px grid
+    </text>
+    
+    <rect x="24" y="912" width="327" height="200" rx="12" fill="#FFFFFF"/>
+    
+    <rect x="40" y="932" width="4" height="20" fill="#10B981"/>
+    <text x="52" y="947" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">4px - Tight spacing</text>
+    
+    <rect x="40" y="964" width="8" height="20" fill="#10B981"/>
+    <text x="56" y="979" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">8px - XS</text>
+    
+    <rect x="40" y="996" width="16" height="20" fill="#10B981"/>
+    <text x="64" y="1011" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">16px - SM (Gutter)</text>
+    
+    <rect x="40" y="1028" width="24" height="20" fill="#10B981"/>
+    <text x="72" y="1043" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">24px - MD</text>
+    
+    <rect x="40" y="1060" width="32" height="20" fill="#10B981"/>
+    <text x="80" y="1075" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">32px - LG (Section spacing)</text>
+  </g>
+  
+  <!-- Components Section -->
+  <g id="components">
+    <text x="24" y="1152" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0F172A">
+      Key Components
+    </text>
+    
+    <!-- Button Variants -->
+    <text x="24" y="1180" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      BUTTONS
+    </text>
+    
+    <!-- Primary Button -->
+    <rect x="24" y="1192" width="160" height="44" rx="8" fill="#10B981"/>
+    <text x="104" y="1218" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+      Primary
+    </text>
+    
+    <!-- Secondary Button -->
+    <rect x="191" y="1192" width="160" height="44" rx="8" fill="#F1F5F9"/>
+    <text x="271" y="1218" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#64748B" text-anchor="middle">
+      Secondary
+    </text>
+    
+    <!-- Danger Button -->
+    <rect x="24" y="1244" width="160" height="44" rx="8" fill="#EF4444"/>
+    <text x="104" y="1270" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+      Danger
+    </text>
+    
+    <!-- Outlined Button -->
+    <rect x="191" y="1244" width="160" height="44" rx="8" fill="transparent" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="271" y="1270" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#475569" text-anchor="middle">
+      Outlined
+    </text>
+    
+    <!-- Input Field -->
+    <text x="24" y="1324" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      INPUT FIELD
+    </text>
+    <rect x="24" y="1332" width="327" height="48" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="40" y="1360" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">
+      Placeholder text...
+    </text>
+  </g>
+</svg>

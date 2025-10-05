@@ -1,0 +1,38 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Overlay -->
+  <rect width="375" height="812" fill="#000000" opacity="0.5"/>
+  
+  <!-- Modal Container -->
+  <g id="delete-confirmation-modal">
+    <rect x="40" y="306" width="295" height="200" rx="16" fill="#FFFFFF"/>
+    
+    <!-- Warning Icon -->
+    <circle cx="187.5" cy="356" r="28" fill="#FEE2E2"/>
+    <path d="M 187.5 344 L 187.5 362 M 187.5 372 L 187.5 374" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Modal Header -->
+    <text x="187.5" y="412" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0F172A" text-anchor="middle">
+      Delete Transaction?
+    </text>
+    
+    <!-- Description -->
+    <text x="187.5" y="438" font-family="Inter, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">
+      This action cannot be undone.
+    </text>
+    
+    <!-- Action Buttons -->
+    <g id="action-buttons">
+      <!-- Cancel Button -->
+      <rect x="56" y="458" width="119" height="36" rx="8" fill="#F1F5F9"/>
+      <text x="115.5" y="481" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#64748B" text-anchor="middle">
+        Cancel
+      </text>
+      
+      <!-- Delete Button -->
+      <rect x="200" y="458" width="119" height="36" rx="8" fill="#EF4444"/>
+      <text x="259.5" y="481" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+        Delete
+      </text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,86 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Overlay -->
+  <rect width="375" height="812" fill="#000000" opacity="0.5"/>
+  
+  <!-- Modal Container -->
+  <g id="add-transaction-modal">
+    <rect x="24" y="180" width="327" height="452" rx="16" fill="#FFFFFF"/>
+    
+    <!-- Modal Header -->
+    <text x="40" y="220" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#0F172A">
+      Add Transaction
+    </text>
+    <!-- Close Button -->
+    <circle cx="327" cy="206" r="16" fill="#F1F5F9"/>
+    <path d="M 322 201 L 332 211 M 322 211 L 332 201" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Tab Selector: Expense/Income -->
+    <g id="transaction-type-tabs">
+      <rect x="40" y="244" width="295" height="44" rx="8" fill="#F8FAFC"/>
+      <!-- Expense Tab (Active) -->
+      <rect x="44" y="248" width="143" height="36" rx="6" fill="#EF4444"/>
+      <text x="90" y="272" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">
+        Expense
+      </text>
+      <!-- Income Tab -->
+      <rect x="191" y="248" width="140" height="36" rx="6" fill="transparent"/>
+      <text x="236" y="272" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">
+        Income
+      </text>
+    </g>
+    
+    <!-- Amount Input -->
+    <g id="amount-input">
+      <text x="40" y="320" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+        AMOUNT
+      </text>
+      <rect x="40" y="328" width="295" height="48" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="56" y="356" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#0F172A">
+        €
+      </text>
+      <text x="74" y="356" font-family="Inter, sans-serif" font-size="18" fill="#94A3B8">
+        0.00
+      </text>
+      <!-- Cursor indicator -->
+      <line x1="103" y1="344" x2="103" y2="362" stroke="#10B981" stroke-width="2"/>
+    </g>
+    
+    <!-- Category Dropdown -->
+    <g id="category-dropdown">
+      <text x="40" y="408" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+        CATEGORY
+      </text>
+      <rect x="40" y="416" width="295" height="48" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="56" y="444" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">
+        Select category...
+      </text>
+      <path d="M 315 437 L 320 442 L 325 437" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    
+    <!-- Description Input -->
+    <g id="description-input">
+      <text x="40" y="496" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+        DESCRIPTION
+      </text>
+      <rect x="40" y="504" width="295" height="48" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="56" y="532" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">
+        Add description (optional)
+      </text>
+    </g>
+    
+    <!-- Action Buttons -->
+    <g id="action-buttons">
+      <!-- Cancel Button -->
+      <rect x="40" y="576" width="139" height="44" rx="8" fill="#F1F5F9"/>
+      <text x="84" y="602" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#64748B">
+        Cancel
+      </text>
+      
+      <!-- Save Button -->
+      <rect x="196" y="576" width="139" height="44" rx="8" fill="#10B981"/>
+      <text x="248" y="602" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">
+        Save
+      </text>
+    </g>
+  </g>
+</svg>
