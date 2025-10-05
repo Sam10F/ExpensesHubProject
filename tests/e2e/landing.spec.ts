@@ -142,4 +142,91 @@ test.describe('Landing Page', () => {
     await expect(deleteBtn).toBeVisible()
     await expect(deleteBtn).toHaveAttribute('aria-label', 'Delete transaction')
   })
+
+  test('should add an expense and then remove it successfully', async ({ page }) => {
+    // Wait for page to load
+    await page.waitForLoadState('networkidle')
+
+    // Step 1: Add a new expense with unique identifier
+    const timestamp = Date.now()
+    const testAmount = '75.50'
+    const testDescription = `E2E Test ${timestamp}`
+
+    const fabButton = page.locator('.fab-button')
+    await fabButton.click()
+
+    // Wait for modal to open
+    await expect(page.locator('.modal-overlay')).toBeVisible()
+    await expect(page.locator('h2.modal-title:has-text("Add Transaction")')).toBeVisible()
+
+    // Expense should be selected by default
+    await expect(page.locator('.type-btn.active:has-text("Expense")')).toBeVisible()
+
+    // Fill in transaction details
+    await page.fill('input[placeholder="0.00"]', testAmount)
+    await page.fill('input[placeholder="Add description (optional)"]', testDescription)
+
+    // Select first available category from dropdown
+    const categorySelect = page.locator('select.category-select')
+    await categorySelect.selectOption({ index: 1 }) // Select first non-empty option
+
+    // Submit the form
+    const submitBtn = page.locator('button:has-text("Save")')
+    await submitBtn.click()
+
+    // Wait for modal to close
+    await expect(page.locator('.modal-overlay')).not.toBeVisible()
+
+    // Wait for transaction to appear
+    await page.waitForLoadState('networkidle')
+    await page.waitForTimeout(500) // Wait for UI update
+
+    // Step 2: Verify the expense is correctly listed with all fields visible
+    const transactionList = page.locator('.transaction-list')
+    await expect(transactionList).toBeVisible()
+
+    // Find the newly added transaction by unique description
+    const newTransaction = page.locator('.transaction-item', {
+      has: page.locator(`.transaction-description:has-text("${testDescription}")`)
+    })
+
+    await expect(newTransaction).toBeVisible()
+
+    // Verify all fields are visible and correct
+    const category = newTransaction.locator('.transaction-category')
+    await expect(category).toBeVisible()
+    await expect(category).not.toBeEmpty()
+
+    const description = newTransaction.locator('.transaction-description')
+    await expect(description).toBeVisible()
+    await expect(description).toHaveText(testDescription)
+
+    const amount = newTransaction.locator('.transaction-amount')
+    await expect(amount).toBeVisible()
+    await expect(amount).toHaveText(`-€${testAmount}`)
+    await expect(amount).toHaveClass(/expense/)
+
+    const deleteBtn = newTransaction.locator('.delete-btn')
+    await expect(deleteBtn).toBeVisible()
+
+    // Step 3: Delete the expense
+    await deleteBtn.click()
+
+    // Wait for delete confirmation modal
+    await expect(page.locator('.modal-overlay')).toBeVisible()
+
+    // Confirm deletion
+    const confirmBtn = page.locator('button:has-text("Delete")')
+    await confirmBtn.click()
+
+    // Wait for modal to close
+    await expect(page.locator('.modal-overlay')).not.toBeVisible()
+
+    // Wait for deletion to complete
+    await page.waitForLoadState('networkidle')
+    await page.waitForTimeout(500) // Wait for UI update
+
+    // Step 4: Verify the expense is no longer visible
+    await expect(newTransaction).not.toBeVisible()
+  })
 })
