@@ -114,7 +114,7 @@ const availableMoney = computed(() => {
 
 // Helper to get category name
 const getCategoryName = (categoryId: string) => {
-  const category = categories.value.find(c => c._id === categoryId)
+  const category = categories.value.find(c => String(c._id) === String(categoryId))
   return category?.name || 'Unknown'
 }
 

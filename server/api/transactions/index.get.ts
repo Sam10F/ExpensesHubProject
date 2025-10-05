@@ -9,11 +9,7 @@ import { Transaction } from '~/server/models/Transaction'
 export default defineEventHandler(async _event => {
   try {
     // Fetch all transactions, sorted by date (most recent first)
-    const transactions = await Transaction.find()
-      .sort({ date: -1 })
-      .populate('categoryId')
-      .lean()
-      .exec()
+    const transactions = await Transaction.find().sort({ date: -1 }).lean().exec()
 
     return transactions
   } catch (error) {
